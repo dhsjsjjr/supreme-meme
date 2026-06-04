@@ -1,0 +1,45 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+
+    "controller.render.lifeseries.snail": {
+      "geometry": "Geometry.default",
+      "materials": [{ "*": "Material.default" }],
+      "textures": [
+        "q.mark(v.is_trivia) ? Texture.trivia : (q.mark(v.is_zombie) ? Texture.zombie : Texture.default)"
+      ],
+      "part_visibility": [
+        { "trivia":    "v.is_trivia" },
+        { "parachute": "v.is_gliding" },
+        { "strings":   "v.is_gliding" },
+        { "propeller": "v.is_flying" },
+        { "top":       "v.is_flying" }
+      ]
+    },
+
+    "controller.render.lifeseries.triviabot": {
+      "geometry": "Geometry.default",
+      "materials": [{ "*": "Material.default" }],
+      "textures": [
+        "v.is_santa ? Texture.santa : Texture.default"
+      ]
+    },
+
+    "controller.render.lifeseries.angrysnowman": {
+      "geometry": "Geometry.default",
+      "materials": [{ "*": "Material.default" }],
+      "textures": [
+        "Array.textures[q.variant]"
+      ],
+      "arrays": {
+        "textures": {
+          "Array.textures": [
+            "Texture.v0", "Texture.v1", "Texture.v2", "Texture.v3",
+            "Texture.v4", "Texture.v5", "Texture.v6", "Texture.v7"
+          ]
+        }
+      }
+    }
+
+  }
+}

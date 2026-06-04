@@ -1,0 +1,10 @@
+id: lifeseries-geyser-extension
+name: LifeSeries Geyser Extension
+version: "1.0.0"
+authors:
+  - mat0u5
+description: >
+  Registers Snail, TriviaBot, and AngrySnowman as custom Bedrock entities
+  so Bedrock players on a LifeSeries server can see them properly.
+main: net.mat0u5.lifeseries.geyser.LifeSeriesExtension
+api: "2.1.0"
