@@ -125,4 +125,3 @@ int variation = new Random(getUUID().hashCode()).nextInt(SKIN_VARIATIONS);
 setVariant(variation); // uses vanilla SynchedEntityData VARIANT if SnowGolem has it
 ```
 
-Or just live with variation_0 — they all look like snowmen.
