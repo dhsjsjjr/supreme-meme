@@ -8,11 +8,10 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
-    maven("https://repo.opencollab.dev/main/")   // Geyser + Floodgate artifacts
+    maven("https://repo.opencollab.dev/main/")
 }
 
 dependencies {
-    // Geyser Extension API — provided at runtime by Geyser itself
     compileOnly("org.geysermc.geyser:api:2.1.0-SNAPSHOT")
 }
 
@@ -23,7 +22,6 @@ java {
 
 tasks.shadowJar {
     archiveClassifier.set("")
-    // No extra dependencies to shade — Geyser API is provided
 }
 
 tasks.build {
