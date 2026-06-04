@@ -1,31 +1,44 @@
 plugins {
-    id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    java
 }
 
-group = "net.mat0u5.lifeseries"
-version = "1.0.0"
+val id = project.property("id") as String
+val extensionName = project.property("name") as String
+val author = project.property("author") as String
+val version = project.version as String
+val geyserApiVersion = "2.9.5"
 
 repositories {
+    maven("https://repo.opencollab.dev/main/")
     mavenCentral()
-    maven("https://repo.opencollab.dev/main/")   // Geyser + Floodgate artifacts
 }
 
 dependencies {
-    // Geyser Extension API — provided at runtime by Geyser itself
-    compileOnly("org.geysermc.geyser:api:2.1.0-SNAPSHOT")
+    compileOnly("org.geysermc.geyser:api:$geyserApiVersion-SNAPSHOT")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.shadowJar {
-    archiveClassifier.set("")
-    // No extra dependencies to shade — Geyser API is provided
+afterEvaluate {
+    val idRegex = Regex("[a-z][a-z0-9-_]{0,63}")
+    if (idRegex.matches(id).not()) {
+        throw IllegalArgumentException("Invalid extension id $id!")
+    }
 }
 
-tasks.build {
-    dependsOn(tasks.shadowJar)
+tasks {
+    processResources {
+        filesMatching("extension.yml") {
+            expand(
+                "id" to id,
+                "name" to extensionName,
+                "api" to geyserApiVersion,
+                "version" to version,
+                "author" to author
+            )
+        }
+    }
 }
